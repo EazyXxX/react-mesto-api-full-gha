@@ -1,0 +1,9 @@
+.null-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  padding-bottom: 470px;
+}

@@ -1,0 +1,4 @@
+.popup_type_picture {
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.9);
+}
