@@ -4,12 +4,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://eazyxxx.github.io/express-mesto-gha/
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.58.58
 
-Frontend https://...
+Frontend https://eazyxxx.front.nomoredomains.monster
 
-Backend https://...
+Backend eazyxxx.back.nomoredomains.monster
