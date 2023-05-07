@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const index = require('./routes/index');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const corsMiddleware = require('./middlewares/cors');
 
 mongoose.set('strictQuery', false);
 const app = express();
@@ -23,5 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(index);
+app.use(corsMiddleware);
 
 app.listen(PORT, (error) => (error ? console.error(error) : console.log(`App listening on port ${PORT}`)));
