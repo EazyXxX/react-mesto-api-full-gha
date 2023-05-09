@@ -12,4 +12,4 @@ IP-адрес 158.160.58.58
 
 Frontend https://eazyxxx.front.nomoredomains.monster
 
-Backend eazyxxx.back.nomoredomains.monster
+Backend https://eazyxxx.back.nomoredomains.monster
