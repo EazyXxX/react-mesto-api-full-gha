@@ -1,4 +1,6 @@
-const corsMiddleware = require('express');
+const express = require('express');
+
+const corsMiddleware = express();
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
