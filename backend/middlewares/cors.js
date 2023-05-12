@@ -5,8 +5,7 @@ const corsMiddleware = express();
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
+  'http://eazyxxx.front.nomoredomains.monster',
   'localhost:3000',
 ];
 
