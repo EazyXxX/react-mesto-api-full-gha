@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const cors = require('cors');
 const index = require('./routes/index');
 const corsMiddleware = require('./middlewares/cors');
 
@@ -18,11 +17,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(helmet());
-app.use(cors({ origin: 'https://eazyxxx.front.nomoredomains.monster' }));
+app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(index);
-app.use(corsMiddleware);
 
 app.listen(PORT, (error) => (error ? console.error(error) : console.log(`App listening on port ${PORT}`)));
