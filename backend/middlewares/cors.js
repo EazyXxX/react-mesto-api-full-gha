@@ -8,6 +8,11 @@ const allowedCors = [
   'https://eazyxxx.front.nomoredomains.monster',
   'https://eazyxxx.front.nomoredomains.monster/sign-up',
   'https://eazyxxx.front.nomoredomains.monster/sign-in',
+  'https://eazyxxx.front.nomoredomains.monster/cards',
+  'https://eazyxxx.front.nomoredomains.monster/cards/',
+  'https://eazyxxx.front.nomoredomains.monster/users',
+  'https://eazyxxx.front.nomoredomains.monster/users/me',
+  'https://eazyxxx.front.nomoredomains.monster/users/me/avatar',
   'localhost:3000',
 ];
 
