@@ -16,8 +16,8 @@ index.get('/crash-test', () => {
   }, 0);
 });
 
-index.post('/signup', signUpValidation, signup);
-index.post('/signin', signInValidation, signin);
+index.post('/sign-up', signUpValidation, signup);
+index.post('/sign-in', signInValidation, signin);
 
 index.use(authMiddleware);
 
