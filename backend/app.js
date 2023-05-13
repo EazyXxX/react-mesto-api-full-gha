@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const index = require('./routes/index');
+const { signin, signup } = require('./controllers/users');
+const { signUpValidation, signInValidation } = require('./validation/validation');
 
 mongoose.set('strictQuery', false);
 const app = express();
@@ -18,6 +20,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.post('/sign-up', signUpValidation, signup);
+app.post('/sign-in', signInValidation, signin);
 
 app.use(index);
 

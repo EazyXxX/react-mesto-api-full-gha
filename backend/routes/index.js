@@ -1,7 +1,5 @@
 const index = require('express').Router();
 const { errors } = require('celebrate');
-const { signin, signup } = require('../controllers/users');
-const { signUpValidation, signInValidation } = require('../validation/validation');
 const authMiddleware = require('../middlewares/auth');
 const users = require('./users');
 const cards = require('./cards');
@@ -15,9 +13,6 @@ index.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-index.post('/sign-up', signUpValidation, signup);
-index.post('/sign-in', signInValidation, signin);
 
 index.use(authMiddleware);
 
