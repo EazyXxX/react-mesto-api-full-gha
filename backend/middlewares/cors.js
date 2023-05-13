@@ -6,6 +6,8 @@ const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
   'https://eazyxxx.front.nomoredomains.monster',
+  'https://eazyxxx.front.nomoredomains.monster/sign-up',
+  'https://eazyxxx.front.nomoredomains.monster/sign-in',
   'localhost:3000',
 ];
 
