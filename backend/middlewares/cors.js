@@ -5,7 +5,7 @@ const corsMiddleware = express();
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
-  'http://eazyxxx.front.nomoredomains.monster',
+  'https://eazyxxx.front.nomoredomains.monster',
   'localhost:3000',
 ];
 
