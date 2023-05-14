@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const index = require('./routes/index');
 const corsMiddleware = require('./middlewares/cors');
+const { signin, signup } = require('./controllers/users');
+const { signUpValidation, signInValidation } = require('./validation/validation');
 
 mongoose.set('strictQuery', false);
 const app = express();
@@ -20,6 +22,9 @@ app.use(helmet());
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+index.post('/signup', signUpValidation, signup);
+index.post('/signin', signInValidation, signin);
 
 app.use(index);
 
