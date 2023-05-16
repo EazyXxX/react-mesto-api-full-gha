@@ -19,11 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: 'https://eazyxxx.front.nomoredomains.monster' }));
-app.use(cors({ origin: 'https://eazyxxx.front.nomoredomains.monster/users/me' }));
-app.use(cors({ origin: 'https://eazyxxx.front.nomoredomains.monster/cards' }));
-
-
+app.use(cors());
 
 app.use(index);
 
