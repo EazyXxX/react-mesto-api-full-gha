@@ -12,6 +12,7 @@
             ]
           }
         ],
+        "no-useless-escape":"off",
         "max-len":"off",
         "no-console":"off"
       }
