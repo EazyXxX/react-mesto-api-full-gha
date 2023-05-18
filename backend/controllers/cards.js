@@ -58,12 +58,12 @@ const updateLike = (req, res, next, method) => {
     { [method]: { likes: req.user._id } },
     { new: true },
   )
-    .populate(['likes'])
+    .populate(['likes', 'owner'])
     .then((card) => {
       if (card === null) {
         next(new NotFoundError());
       } else {
-        res.send({ likes: card.likes });
+        res.send({ card });
       }
     })
     .catch((err) => {
