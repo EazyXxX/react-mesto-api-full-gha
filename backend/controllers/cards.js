@@ -51,7 +51,7 @@ const deleteCard = (req, res, next) => {
     });
 };
 
-const updateLike = (req, res, next, method) => {
+const updateLike = (req, res, method, next) => {
   const { cardId } = req.params;
   Card.findByIdAndUpdate(
     cardId,
@@ -60,7 +60,7 @@ const updateLike = (req, res, next, method) => {
   )
     .populate(['likes', 'owner'])
     .then((card) => {
-      if (card === null) {
+      if (!card) {
         next(new NotFoundError());
       } else {
         res.send(card);
