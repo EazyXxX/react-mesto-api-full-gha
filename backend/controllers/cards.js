@@ -63,7 +63,7 @@ const updateLike = (req, res, next, method) => {
       if (card === null) {
         next(new NotFoundError());
       } else {
-        res.send({ likes: card.likes });
+        res.send(card);
       }
     })
     .catch((err) => {
