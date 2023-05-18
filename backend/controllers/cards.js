@@ -58,6 +58,7 @@ const updateLike = (req, res, next, method) => {
     { [method]: { likes: req.user._id } },
     { new: true },
   )
+    .populate(['likes', 'owner'])
     .then((card) => {
       if (card === null) {
         next(new NotFoundError());
