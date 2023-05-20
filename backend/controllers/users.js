@@ -17,9 +17,13 @@ const getUsers = async (req, res, next) => {
 const updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
   // достаём юзера из БДшки
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+  User
+    .findById(req.user._id)
     .orFail(() => res.send(new NotFoundError()))
-    .then((users) => res.send(users))
+    .then(() => {
+      User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+        .then((users) => res.send(users));
+    })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError());
@@ -72,7 +76,7 @@ const signup = async (req, res, next) => {
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
       console.error(err);
-      return next(new BadRequestError());
+      return next(new UnauthorizedError());
     } if (err.code === 11000) {
       return next(new EmailExistsError());
     }
@@ -88,12 +92,12 @@ const signin = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
     console.log(user);
     if (user === null) {
-      return next(new NotFoundError('Указанный пользователь не найден'));
+      next(new UnauthorizedError());
     }
     const matched = await bcrypt.compare(password, user.password);
 
     if (!matched) {
-      return next(new UnauthorizedError());
+      next(new UnauthorizedError());
     }
 
     const token = jsonwebtoken.sign(
