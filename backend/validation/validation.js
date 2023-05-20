@@ -7,7 +7,6 @@ const signUpValidation = celebrate({
     email: Joi.string().email().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    password: Joi.string().required().min(2).max(30),
     avatar: Joi.string().pattern(regexUrl),
   }),
 });
@@ -15,13 +14,12 @@ const signUpValidation = celebrate({
 const signInValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
-    password: Joi.string().required().min(2).max(30),
   }),
 });
 
 const getUserValidation = celebrate({
-  body: Joi.object({
-    _id: Joi.string().required().hex().length(24),
+  params: Joi.object().keys({
+    userId: Joi.string().hex().length(24),
   }),
 });
 
@@ -38,14 +36,6 @@ const updateUserAvatarValidation = celebrate({
   }),
 });
 
-const getCardsValidation = celebrate({
-  body: Joi.object().keys({
-    owner: Joi.object().keys({
-      _id: Joi.string().required().hex().length(24),
-    }),
-  }).unknown(true),
-});
-
 const createCardValidation = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -54,25 +44,23 @@ const createCardValidation = celebrate({
 });
 
 const deleteCardValidation = celebrate({
-  body: Joi.object().keys({
-    owner: Joi.object().keys({
-      _id: Joi.string().required().hex().length(24),
-    }),
-  }).unknown(true),
+  params: Joi.object().keys({
+    cardId: Joi.string().hex().length(24),
+  }),
 });
 
 const likeCardValidation = celebrate({
-  body: Joi.object().keys({
-    _id: Joi.string().hex().length(24),
-  }).unknown(true),
+  params: Joi.object().keys({
+    cardId: Joi.string().hex().length(24),
+  }),
 });
 
 const deleteLikeCardValidation = celebrate({
-  body: Joi.object().keys({
-    _id: Joi.string().hex().length(24),
-  }).unknown(true),
+  params: Joi.object().keys({
+    cardId: Joi.string().hex().length(24),
+  }),
 });
 
 module.exports = {
-  signUpValidation, signInValidation, getUserValidation, updateUserProfileValidation, updateUserAvatarValidation, getCardsValidation, createCardValidation, deleteCardValidation, likeCardValidation, deleteLikeCardValidation,
+  signUpValidation, signInValidation, getUserValidation, updateUserProfileValidation, updateUserAvatarValidation, createCardValidation, deleteCardValidation, likeCardValidation, deleteLikeCardValidation,
 };

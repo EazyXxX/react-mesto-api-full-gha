@@ -6,7 +6,7 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 const ConflictError = require('../errors/ConflictError');
 
 const getCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .then((cards) => { res.send(cards); })
     .catch(next);
 };
@@ -22,7 +22,7 @@ const createCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        next(new UnauthorizedError());
+        next(new BadRequestError());
       } else {
         next(err);
       }
@@ -33,10 +33,13 @@ const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.findById(cardId)
     .then((card) => {
+      if (!card) {
+        res.send(new NotFoundError());
+      }
       if (String(card.owner) === req.user._id) {
         Card.findByIdAndRemove(cardId)
           .then(() => res.send({ message: `Карточка ${cardId} удалена` }))
-          .catch(() => res.send(new NotFoundError()));
+          .catch((err) => next(err));
       } else {
         next(new ConflictError());
       }
@@ -68,7 +71,7 @@ const updateLike = (req, res, method, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        res.status(new BadRequestError().statusCode).send({ message: new BadRequestError().message });
+        next(new BadRequestError('Передан некорректный id карточки'));
       } else {
         next(err);
       }

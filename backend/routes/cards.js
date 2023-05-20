@@ -6,7 +6,6 @@ const {
   getCards, createCard, deleteCard, likeCard, deleteLikeCard,
 } = require('../controllers/cards');
 
-cards.get('/', getCardsValidation, getCards);
 cards.post('/', createCardValidation, createCard);
 cards.delete('/:cardId', deleteCardValidation, deleteCard);
 cards.put('/:cardId/likes', likeCardValidation, likeCard);
