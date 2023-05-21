@@ -12,14 +12,15 @@ const getCards = (req, res, next) => {
 };
 
 const createCard = (req, res, next) => {
-  const owner = req.user._id;
+  const owner = req.user;
   const { name, link } = req.body;
-  Card.create({ name, link, owner })
+  const newCard = new Card({ name, link, owner });
+  newCard.save()
     .then((card) => {
       card.populate('owner');
     })
     .then((card) => {
-      res.status(201).json(card);
+      res.status(201).send(card);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
