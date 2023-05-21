@@ -12,7 +12,7 @@ const getCards = (req, res, next) => {
 };
 
 const createCard = (req, res, next) => {
-  const owner = req.user;
+  const owner = req.user._id;
   const { name, link } = req.body;
   const newCard = new Card({ name, link, owner });
   newCard.save()
