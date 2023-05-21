@@ -25,11 +25,11 @@ index.use(authMiddleware);
 index.use('/users', users);
 index.use('/cards', cards);
 
-index.use('*', authMiddleware, (req, res, next) => {
+index.use('*', (req, res, next) => {
   const err = new NotFoundError('Страница не существует');
   err.statusCode = 404;
   next(err);
-});
+}, authMiddleware);
 
 index.use(errorLogger);
 
