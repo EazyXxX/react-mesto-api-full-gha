@@ -12,18 +12,21 @@ const getCards = (req, res, next) => {
 };
 
 const createCard = (req, res, next) => {
+  const owner = req.user._id;
   const { name, link } = req.body;
-  const owner = req.user;
-
   Card.create({ name, link, owner })
-    .then((card) => card.populate('owner'))
-    .then((card) => res.send(card))
+    .then((card) => {
+      card.populate('owner');
+    })
+    .then((card) => {
+      res.status(201).json(card);
+    })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при создании карточки'));
-        return;
+      if (err instanceof mongoose.Error.ValidationError) {
+        next(new BadRequestError());
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
