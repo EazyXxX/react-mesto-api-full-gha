@@ -1,9 +1,0 @@
-.popup__save-button_type_invalid {
-  background-color: white;
-  border: 1px solid #c4c4c4;
-  color: #c4c4c4;
-}
-
-.popup__save-button_type_invalid:hover {
-  background: none;
-}
