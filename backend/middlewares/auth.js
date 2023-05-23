@@ -1,6 +1,8 @@
 /* eslint-disable consistent-return */
+require('dotenv');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config');
+
+const { JWT_SECRET } = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 const authMiddleware = (req, res, next) => {
