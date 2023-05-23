@@ -6,7 +6,9 @@ const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const EmailExistsError = require('../errors/EmailExistsError');
-const { JWT_SECRET } = require('../config');
+require('dotenv').config();
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUsers = async (req, res, next) => {
   User.find({})
@@ -98,7 +100,7 @@ const signin = async (req, res, next) => {
 
     const token = jsonwebtoken.sign(
       { _id: user._id },
-      JWT_SECRET,
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       { expiresIn: '7d' },
     );
     return res.send({ token });
