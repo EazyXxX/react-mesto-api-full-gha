@@ -1,0 +1,25 @@
+.header__mob-link {
+  color: white;
+  margin-top: 51px;
+  margin-bottom: 46px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.header__mob-link:hover {
+  transition: 0.2s;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 770px) {
+  .header__mob-link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 34px;
+    margin-bottom: 33px;
+    margin-left: 0;
+    margin-right: 30px;
+  }
+}

@@ -1,0 +1,11 @@
+.popup__cross-button_type_picture {
+  top: -40px;
+  right: -40px;
+}
+
+@media screen and (max-width: 320px) {
+  .popup__cross-button_type_picture {
+    top: -36px;
+    right: 0;
+  }
+}
