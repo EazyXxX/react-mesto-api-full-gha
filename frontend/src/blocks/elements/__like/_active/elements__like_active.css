@@ -1,0 +1,4 @@
+.elements__like_active {
+    display: block;
+    background-image: url("../../../../images/Darkheart.svg");
+}

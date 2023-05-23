@@ -1,0 +1,23 @@
+.profile__info {
+    display: grid;
+    margin-top: 22px;
+    grid-template-columns: 294px auto;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+        "name edit-button"
+        "description ...";
+    row-gap: 9px;
+    column-gap: 18px;
+}
+
+@media screen and (max-width: 770px) {
+    .profile__info {
+        margin-top: 0;
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 7px;
+        grid-template-columns: auto;
+        align-self: center;
+        margin-left: 23px;
+    }
+}

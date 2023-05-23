@@ -1,0 +1,17 @@
+.header__stripes_close {
+  background-image: url("../../../../images/Cross.svg");
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0;
+  margin-right: 30px;
+  background-color: transparent;
+  height: 24px;
+  width: 24px;
+  background-size: 24px 24px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.2s;
+  outline: none;
+  border: none;
+}
