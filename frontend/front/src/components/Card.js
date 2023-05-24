@@ -13,12 +13,7 @@ function Card({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === currentUser._id;
-  {
-    isOwn && (
-      <button className="elements__delete-button" onClick={handleDeleteClick} />
-    );
-  }
+  const isOwn = card.owner === currentUser._id || card.owner._id === currentUser._id;
 
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
   const cardLikeButtonClassName = `elements__like ${
