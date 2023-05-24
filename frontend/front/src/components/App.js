@@ -191,8 +191,13 @@ function App() {
         localStorage.setItem("token", res.token);
         localStorage.setItem("email", data.email);
         setEmail(data.email);
-        setLoggedIn(true);
-        navigate("/");
+        api.getUserInfo()
+            .then((userData) => {
+              setCurrentUser(userData);
+              setLoggedIn(true);
+              navigate("/");
+            })
+            .catch((err) => {console.log(err)})
       })
       .catch((err) => {
         console.log(err);
