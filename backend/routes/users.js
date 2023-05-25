@@ -6,7 +6,7 @@ const {
 
 users.get('/', getUsers);
 users.get('/me', getUserInfo);
-users.get('/me', getUserValidation, getUser);
+users.get('/:userId', getUserValidation, getUser);
 users.patch('/me', updateUserProfileValidation, updateUserProfile);
 users.patch('/me/avatar', updateUserAvatarValidation, updateUserAvatar);
 
