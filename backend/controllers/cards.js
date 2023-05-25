@@ -71,7 +71,7 @@ const updateLike = (req, res, method, next) => {
       if (err instanceof mongoose.Error.CastError) {
         return next(new BadRequestError('Передан некорректный id карточки'));
       }
-      next(err);
+      return next(err);
     });
 };
 

@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 require('dotenv');
 const jwt = require('jsonwebtoken');
 
@@ -9,8 +8,7 @@ const authMiddleware = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer')) {
-    next(new UnauthorizedError());
-    return;
+    return next(new UnauthorizedError());
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -20,8 +18,7 @@ const authMiddleware = (req, res, next) => {
     // попытаемся верифицировать токен
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    next(new UnauthorizedError());
-    return;
+    return next(new UnauthorizedError());
   }
   req.user = payload;
   next();
