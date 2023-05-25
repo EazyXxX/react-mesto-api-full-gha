@@ -16,16 +16,17 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner })
     .then((card) => {
-      return card.populate('owner');
+      card.populate('owner');
     })
     .then((card) => {
       res.status(201).send(card);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        return next(new BadRequestError());
+        next(new BadRequestError());
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -34,14 +35,15 @@ const deleteCard = (req, res, next) => {
   Card.findById(cardId)
     .then((card) => {
       if (!card) {
-        return next(new NotFoundError());
+        res.send(new NotFoundError());
       }
       if (String(card.owner) === req.user._id) {
         Card.findByIdAndRemove(cardId)
           .then(() => res.send({ message: `Карточка ${cardId} удалена` }))
           .catch((err) => next(err));
+      } else {
+        next(new ConflictError());
       }
-      next(new ConflictError());
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -63,15 +65,17 @@ const updateLike = (req, res, method, next) => {
     .populate(['likes', 'owner'])
     .then((card) => {
       if (!card) {
-        return next(new NotFoundError());
+        next(new NotFoundError());
+      } else {
+        res.send(card);
       }
-      res.send(card);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        return next(new BadRequestError('Передан некорректный id карточки'));
+        next(new BadRequestError('Передан некорректный id карточки'));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
