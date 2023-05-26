@@ -110,7 +110,10 @@ const signin = async (req, res, next) => {
 
 const getUserInfo = (req, res, next) => {
   User.findOne({ _id: req.user._id })
-    .then((user) => res.send(user))
+    .then((user) => {
+      console.log(user);
+      res.send(user);
+    })
     .catch(next);
 };
 
