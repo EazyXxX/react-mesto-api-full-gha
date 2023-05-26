@@ -39,19 +39,19 @@ function App() {
   const [requestStatus, setRequestStatus] = useState(false);
 
   useEffect(() => {
-    tokenCheck();
-  }, [])
-
-  useEffect(() => {
     if (loggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-          .then(([userData, cardData]) => {
-            setCurrentUser(userData);
-            setCards(cardData);
-          })
-          .catch((err) => console.log(err));
+      getInitialData()
     }
   }, [loggedIn]);
+
+  function getInitialData() {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, cardData]) => {
+          setCurrentUser(userData);
+          setCards(cardData);
+        })
+        .catch((err) => console.log(err));
+  }
 
   function handleCardClick(data) {
     setImagePopupOpen(true);
@@ -193,6 +193,7 @@ function App() {
         setEmail(data.email);
         setLoggedIn(true);
         navigate("/");
+        getInitialData();
       })
       .catch((err) => {
         console.log(err);
@@ -219,6 +220,14 @@ function App() {
         });
     }
   }
+
+  useEffect(() => {
+    tokenCheck();
+  }, [])
+
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn])
 
   return (
     <div className="page">

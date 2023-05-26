@@ -22,7 +22,9 @@ export class Api {
     //получить данные пользователя (GET)
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: { authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+  },
     });
   }
 
@@ -53,7 +55,10 @@ export class Api {
     //получить список всех карточек в виде массива GET
     return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+  },
     });
   }
 
