@@ -1,7 +1,7 @@
-const centralCatcher = (err, req, res, next) => {
-  if (!err.statusCode) {
+const centralCatcher = (err, req, res) => {
+  if (err.statusCode !== true) {
     console.log(err);
-    return res.status(500).send({ message: 'Ошибка на стороне сервера' });
+    res.status(500).send({ message: 'Ошибка на стороне сервера' });
   }
   console.log(err);
   res.status(err.statusCode).send(err.message);

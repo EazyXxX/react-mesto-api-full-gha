@@ -6,9 +6,7 @@ const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const EmailExistsError = require('../errors/EmailExistsError');
-require('dotenv').config();
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = require('../config');
 
 const getUsers = async (req, res, next) => {
   User.find({})
@@ -19,14 +17,19 @@ const getUsers = async (req, res, next) => {
 const updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
   // достаём юзера из БДшки
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .orFail(new NotFoundError())
-    .then((users) => res.send(users))
+  User
+    .findById(req.user._id)
+    .orFail(() => res.send(new NotFoundError()))
+    .then(() => {
+      User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+        .then((users) => res.send(users));
+    })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        return next(new BadRequestError());
+        next(new BadRequestError());
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -34,11 +37,11 @@ const getUser = (req, res, next) => {
   // достаём юзера из ДБшки
   User
     .findById(req.user._id)
-    .orFail(new NotFoundError())
+    .orFail(() => res.send(new NotFoundError()))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        return next(new BadRequestError());
+        next(new BadRequestError());
       }
       next(err);
     });
@@ -47,12 +50,13 @@ const getUser = (req, res, next) => {
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then((user) => res.send(user))
+    .then(() => res.json(avatar))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        return next(new BadRequestError());
+        next(new BadRequestError());
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -72,7 +76,7 @@ const signup = async (req, res, next) => {
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
       console.error(err);
-      return next(new BadRequestError());
+      return next(new UnauthorizedError());
     } if (err.code === 11000) {
       return next(new EmailExistsError());
     }
@@ -88,17 +92,17 @@ const signin = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
     console.log(user);
     if (user === null) {
-      return next(new UnauthorizedError('Указанный пользователь не найден'));
+      next(new UnauthorizedError());
     }
     const matched = await bcrypt.compare(password, user.password);
 
     if (!matched) {
-      return next(new BadRequestError('Неправильный пароль'));
+      next(new UnauthorizedError());
     }
 
     const token = jsonwebtoken.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      JWT_SECRET,
       { expiresIn: '7d' },
     );
     return res.send({ token });
@@ -109,11 +113,8 @@ const signin = async (req, res, next) => {
 };
 
 const getUserInfo = (req, res, next) => {
-  console.log(req.user, req.user._id);
   User.findOne({ _id: req.user._id })
-    .then((user) => {
-      res.send(user);
-    })
+    .then((user) => res.send(user))
     .catch(next);
 };
 

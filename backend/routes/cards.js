@@ -1,12 +1,12 @@
 const cards = require('express').Router();
 const {
-  createCardValidation, deleteCardValidation, likeCardValidation, deleteLikeCardValidation,
+  getCardsValidation, createCardValidation, deleteCardValidation, likeCardValidation, deleteLikeCardValidation,
 } = require('../validation/validation');
 const {
-  createCard, deleteCard, likeCard, deleteLikeCard, getCards,
+  getCards, createCard, deleteCard, likeCard, deleteLikeCard,
 } = require('../controllers/cards');
 
-cards.get('/', getCards);
+cards.get('/', getCardsValidation, getCards);
 cards.post('/', createCardValidation, createCard);
 cards.delete('/:cardId', deleteCardValidation, deleteCard);
 cards.put('/:cardId/likes', likeCardValidation, likeCard);

@@ -14,9 +14,6 @@
         ],
         "no-useless-escape":"off",
         "max-len":"off",
-        "no-console":"off",
-        "no-unused-vars": "off",
-        "arrow-body-style":"off",
-        "consistent-return":"off"
+        "no-console":"off"
       }
     }
