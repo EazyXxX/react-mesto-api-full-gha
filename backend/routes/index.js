@@ -7,6 +7,7 @@ const users = require('./users');
 const cards = require('./cards');
 const centralCatcher = require('../middlewares/centralCatcher');
 const { requestLogger, errorLogger } = require('../middlewares/logger');
+const NotFoundError = require('../errors/NotFoundError');
 
 index.use(requestLogger);
 
@@ -25,10 +26,9 @@ index.use('/users', users);
 index.use('/cards', cards);
 
 index.use('*', (req, res, next) => {
-  const err = new Error('Страница не существует');
-  err.statusCode = 404;
+  const err = new NotFoundError('Страница не существует');
   next(err);
-});
+}, authMiddleware);
 
 index.use(errorLogger);
 
