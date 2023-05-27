@@ -16,7 +16,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // попытаемся верифицировать токен
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secretS');
   } catch (err) {
     return next(new UnauthorizedError());
   }
