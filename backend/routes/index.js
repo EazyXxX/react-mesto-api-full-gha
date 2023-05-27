@@ -28,7 +28,7 @@ index.use('/cards', cards);
 index.use('*', (req, res, next) => {
   const err = new NotFoundError('Страница не существует');
   next(err);
-}, authMiddleware);
+});
 
 index.use(errorLogger);
 

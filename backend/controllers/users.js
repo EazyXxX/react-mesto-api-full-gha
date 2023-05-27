@@ -33,12 +33,12 @@ const updateUserProfile = (req, res, next) => {
 const getUser = (req, res, next) => {
   // достаём юзера из ДБшки
   User
-    .findById(req.user._id)
-    .orFail(new NotFoundError())
+    .findById(req.params.userId)
+    .orFail(new NotFoundError('Пользователь с указанным id не найден'))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        return next(new BadRequestError());
+        return next(new BadRequestError('Переданы некорректные данные профиля'));
       }
       next(err);
     });
@@ -93,7 +93,7 @@ const signin = async (req, res, next) => {
     const matched = await bcrypt.compare(password, user.password);
 
     if (!matched) {
-      return next(new BadRequestError('Неправильный пароль'));
+      return next(new UnauthorizedError('Неправильный пароль'));
     }
 
     const token = jsonwebtoken.sign(
