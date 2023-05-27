@@ -1,7 +1,7 @@
 require('dotenv');
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, NODE_ENV } = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 const authMiddleware = (req, res, next) => {
@@ -16,7 +16,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // попытаемся верифицировать токен
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     return next(new UnauthorizedError());
   }
