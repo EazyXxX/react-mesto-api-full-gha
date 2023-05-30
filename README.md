@@ -1,15 +1,14 @@
-[![Tests](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml)
-# react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд расположите в директории `backend/`, а фронтенд - в `frontend/`. 
-  
-Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
+# Проект Mesto
 
-Адрес репозитория: https://github.com/EazyXxX/react-mesto-api-full-gha.git
+## Что это за место такое?
 
-## Ссылки на проект
+Изначально данный сервис задумывался как место (тавтология?!), куда можно выкладывать фоточки различных достопримечательностей, но данное SPA по факту обладает более прикольным потенциалом. Вы вольны в форме виртуальных карточек выкладывать сюда всё, что вам заблагорассудится - а другие люди, может быть, на это посмотрят (а может даже поставят вам жирный лайкосик, who knows). 
 
-IP-адрес 158.160.58.58
+Для разработки использовались: React, NodeJS, Express, Mongoose, MongoDB.
 
-Frontend https://eazyxxx.front.nomoredomains.monster
+## Запуск проекта
 
-Backend https://eazyxxx.back.nomoredomains.monster
+`npm run start` — запускает сервер   
+`npm run dev` — запускает сервер с hot-reload
+
+[Ссылка](https://eazyxxx.github.io/express-mesto-gha/) на проект.

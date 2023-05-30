@@ -11,12 +11,6 @@ const NotFoundError = require('../errors/NotFoundError');
 
 index.use(requestLogger);
 
-index.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 index.post('/signup', signUpValidation, signup);
 index.post('/signin', signInValidation, signin);
 
