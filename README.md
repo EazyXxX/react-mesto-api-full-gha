@@ -6,11 +6,6 @@
 
 Для разработки использовались: React, NodeJS, Express, Mongoose, MongoDB.
 
-## Запуск проекта
-
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
-
 Made by ***EaZy***
 
 Адрес репозитория: https://github.com/EazyXxX/react-mesto-api-full-gha.git
