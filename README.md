@@ -11,4 +11,9 @@
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
 
-[Ссылка](https://eazyxxx.github.io/express-mesto-gha/) на проект.
+Made by ***EaZy***
+
+Адрес репозитория: https://github.com/EazyXxX/react-mesto-api-full-gha.git
+
+[Ссылка на сайт](https://eazyxxx.front.nomoredomains.monster)
+
