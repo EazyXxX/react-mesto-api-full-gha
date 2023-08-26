@@ -1,14 +1,16 @@
-# Проект Mesto
+# Mesto project
 
-## Что это за место такое?
+## What is this project about?
 
-Изначально данный сервис задумывался как место (тавтология?), куда можно выкладывать фоточки различных достопримечательностей, но данное SPA по факту обладает более прикольным потенциалом. Вы вольны в форме виртуальных карточек выкладывать сюда всё, что вам заблагорассудится - а другие люди, может быть, на это посмотрят (а может даже влепят вам жирный лайкосик). 
+Initially, this service was conceived as a place where you can upload photos of various attractions, but this SPA actually has more of a fun potential. You are free to post whatever you want there in the form of virtual cards - and other people may look at it (or maybe even give you a fat like).
 
-Для разработки использовались: React, NodeJS, Express, Mongoose, MongoDB.
+Development tools I used: React, NodeJS, Express, Mongoose, MongoDB.
 
 Made by ***EaZy***
 
-Адрес репозитория: https://github.com/EazyXxX/react-mesto-api-full-gha.git
+Repository Address: https://github.com/EazyXxX/react-mesto-api-full-gha.git
 
-[Ссылка на сайт](https://eazyxxx.front.nomoredomains.monster)
+If you don't speak Russian, please, translate this project via [Google Translate](https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb?hl=ru) browser extension. 
+
+[Mesto actual link](https://eazyxxx.front.nomoredomains.monster)
 
